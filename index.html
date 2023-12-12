@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Book</title>
+    <title>Form Validation</title>
     <script src="index.js"></script>
     <style>
         body {
@@ -11,34 +11,40 @@
             text-align: center;
             margin-top: 50px;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        form {
+            width: 300px;
+            margin: 0 auto;
+            text-align: left;
         }
-        li {
-            margin: 5px;
-            padding: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
         }
     </style>
 </head>
 <body>
-    <h1>Contact Book</h1>
-    <label for="nameInput">Name:</label>
-    <input type="text" id="nameInput" placeholder="Enter name">
-    <label for="emailInput">Email:</label>
-    <input type="text" id="emailInput" placeholder="Enter email">
-    <label for="phoneInput">Phone:</label>
-    <input type="text" id="phoneInput" placeholder="Enter phone">
-    <button onclick="addContact()">Add Contact</button>
+    <h1>Form Validation</h1>
+    <form id="validationForm" onsubmit="validateForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" oninput="validateName()">
+        <div id="nameError" class="error"></div>
 
-    <h2>Contacts:</h2>
-    <ul id="contactList"></ul>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" oninput="validateEmail()">
+        <div id="emailError" class="error"></div>
 
-   
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" oninput="validatePassword()">
+        <div id="passwordError" class="error"></div>
+
+        <input type="submit" value="Submit">
+    </form>
+
 </body>
 </html>
