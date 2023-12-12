@@ -3,44 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Number Game</title>
+    <title>Simple Calculator</title>
+    <script src="index.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
         }
+        input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <h1>Guess the Number Game</h1>
-    <p>Guess a number between 1 and 10:</p>
-    <input type="number" id="userGuess" min="1" max="10">
-    <button onclick="checkGuess()">Submit Guess</button>
-    <p id="result"></p>
+    <h1>Simple Calculator</h1>
+    <form name="calculator">
+        <input type="text" name="display" id="display" readonly>
+        <br>
+        <input type="button" value="7" onclick="appendToDisplay('7')">
+        <input type="button" value="8" onclick="appendToDisplay('8')">
+        <input type="button" value="9" onclick="appendToDisplay('9')">
+        <input type="button" value="/" onclick="appendToDisplay('/')">
+        <br>
+        <input type="button" value="4" onclick="appendToDisplay('4')">
+        <input type="button" value="5" onclick="appendToDisplay('5')">
+        <input type="button" value="6" onclick="appendToDisplay('6')">
+        <input type="button" value="-" onclick="appendToDisplay('-')">
+        <br>
+        <input type="button" value="1" onclick="appendToDisplay('1')">
+        <input type="button" value="2" onclick="appendToDisplay('2')">
+        <input type="button" value="3" onclick="appendToDisplay('3')">
+        <input type="button" value="+" onclick="appendToDisplay('+')">
+        <br>
+        <input type="button" value="0" onclick="appendToDisplay('0')">
+        <input type="button" value="." onclick="appendToDisplay('.')">
+        <input type="button" value="=" onclick="calculateResult()">
+        <input type="button" value="C" onclick="clearDisplay()">
+    </form>
 
-    <script>
-        // Generate a random number between 1 and 10
-        const secretNumber = Math.floor(Math.random() * 10) + 1;
 
-        function checkGuess() {
-            // Get the user's guess from the input field
-            const userGuess = document.getElementById('userGuess').value;
-
-            // Check if the guess is correct, too low, or too high
-            if (userGuess == secretNumber) 
-            {
-                document.getElementById('result').innerHTML = 'Congratulations! You guessed the correct number!';
-            } 
-            else if (userGuess < secretNumber) 
-            {
-                document.getElementById('result').innerHTML = 'Too low. Try again!';
-            }
-             else 
-            {
-                document.getElementById('result').innerHTML = 'Too high. Try again!';
-            }
-        }
-    </script>
 </body>
 </html>
