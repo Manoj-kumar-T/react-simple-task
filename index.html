@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>To-Do List</title>
     <script src="index.js"></script>
     <style>
         body {
@@ -11,39 +11,33 @@
             text-align: center;
             margin-top: 50px;
         }
-        input {
-            width: 50px;
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px;
             padding: 5px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <h1>Simple Calculator</h1>
-    <form name="calculator">
-        <input type="text" name="display" id="display" readonly>
-        <br>
-        <input type="button" value="7" onclick="appendToDisplay('7')">
-        <input type="button" value="8" onclick="appendToDisplay('8')">
-        <input type="button" value="9" onclick="appendToDisplay('9')">
-        <input type="button" value="/" onclick="appendToDisplay('/')">
-        <br>
-        <input type="button" value="4" onclick="appendToDisplay('4')">
-        <input type="button" value="5" onclick="appendToDisplay('5')">
-        <input type="button" value="6" onclick="appendToDisplay('6')">
-        <input type="button" value="-" onclick="appendToDisplay('-')">
-        <br>
-        <input type="button" value="1" onclick="appendToDisplay('1')">
-        <input type="button" value="2" onclick="appendToDisplay('2')">
-        <input type="button" value="3" onclick="appendToDisplay('3')">
-        <input type="button" value="+" onclick="appendToDisplay('+')">
-        <br>
-        <input type="button" value="0" onclick="appendToDisplay('0')">
-        <input type="button" value="." onclick="appendToDisplay('.')">
-        <input type="button" value="=" onclick="calculateResult()">
-        <input type="button" value="C" onclick="clearDisplay()">
-    </form>
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button onclick="addTask()">Add Task</button>
 
+    <h2>Tasks:</h2>
+    <ul id="taskList"></ul>
 
+   
 </body>
 </html>
