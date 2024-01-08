@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
+    <title>Note Taking App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,57 +23,78 @@
             border: 1px solid #ccc;
             background-color: #f9f9f9;
         }
-        .completed {
-            text-decoration: line-through;
-            color: #888;
+        button {
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Task Manager</h1>
-    <input type="text" id="taskInput" placeholder="Enter a new task">
-    <button onclick="addTask()">Add Task</button>
+    <h1>Note Taking App</h1>
+    <input type="text" id="noteInput" placeholder="Enter a new note">
+    <button onclick="addNote()">Add Note</button>
 
-    <h2>Tasks:</h2>
-    <ul id="taskList"></ul>
+    <h2>Notes:</h2>
+    <ul id="noteList"></ul>
 
     <script>
-        const tasks = [];
-
-        function addTask() {
-            const taskInput = document.getElementById('taskInput');
-            const taskText = taskInput.value.trim();
-
-            if (taskText !== '') {
-                tasks.push({ text: taskText, completed: false });
-                updateTaskList();
-                taskInput.value = '';
+        class Note {
+            constructor(text) {
+                this.text = text;
+                this.editing = false;
             }
         }
 
-        function updateTaskList() {
-            const taskList = document.getElementById('taskList');
-            taskList.innerHTML = '';
+        const notes = [];
 
-            tasks.forEach((task, index) => {
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value.trim();
+
+            if (noteText !== '') {
+                const newNote = new Note(noteText);
+                notes.push(newNote);
+                updateNoteList();
+                noteInput.value = '';
+            }
+        }
+
+        function updateNoteList() {
+            const noteList = document.getElementById('noteList');
+            noteList.innerHTML = '';
+
+            notes.forEach((note, index) => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <span class="${task.completed ? 'completed' : ''}">${task.text}</span>
-                    <button onclick="toggleTask(${index})">${task.completed ? 'Undo' : 'Complete'}</button>
-                    <button onclick="removeTask(${index})">Remove</button>
-                `;
-                taskList.appendChild(listItem);
+                if (note.editing) {
+                    listItem.innerHTML = `
+                        <input type="text" value="${note.text}" id="editInput${index}">
+                        <button onclick="saveEdit(${index})">Save</button>
+                    `;
+                } else {
+                    listItem.innerHTML = `
+                        <span>${note.text}</span>
+                        <button onclick="editNote(${index})">Edit</button>
+                        <button onclick="deleteNote(${index})">Delete</button>
+                    `;
+                }
+                noteList.appendChild(listItem);
             });
         }
 
-        function toggleTask(index) {
-            tasks[index].completed = !tasks[index].completed;
-            updateTaskList();
+        function editNote(index) {
+            notes[index].editing = true;
+            updateNoteList();
         }
 
-        function removeTask(index) {
-            tasks.splice(index, 1);
-            updateTaskList();
+        function saveEdit(index) {
+            const editInput = document.getElementById(`editInput${index}`);
+            notes[index].text = editInput.value.trim();
+            notes[index].editing = false;
+            updateNoteList();
+        }
+
+        function deleteNote(index) {
+            notes.splice(index, 1);
+            updateNoteList();
         }
     </script>
 </body>
