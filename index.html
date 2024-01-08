@@ -1,50 +1,33 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Validation</title>
-    <script src="index.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        form {
-            width: 300px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-        }
-        .error {
-            color: red;
-            font-size: 12px;
-            margin-top: -10px;
-        }
-    </style>
+    <title>slideshow</title>
 </head>
 <body>
-    <h1>Form Validation</h1>
-    <form id="validationForm" onsubmit="validateForm(event)">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" oninput="validateName()">
-        <div id="nameError" class="error"></div>
+    <img id="img" / height="500px" width="500px">
+    <script>
+        var img = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRccxHRTilkVkyEpcxBZKleWbZjqylAkn_0tw&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ax7T-THa_CZoXUJdr3f22g6uNqObEjd5ZA&usqp=CAU', 'https://media.zigcdn.com/media/model/2022/Aug/head-light-1192332279_600x400.jpg'];
+        var index = 0;
+        var duration = 1000;
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" oninput="validateEmail()">
-        <div id="emailError" class="error"></div>
+        function imgslide() { // called function
+            document.getElementById("img").src = img[index];
+            index++;
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" oninput="validatePassword()">
-        <div id="passwordError" class="error"></div>
+            if (index == img.length) {
+                index = 0;
+            }
 
-        <input type="submit" value="Submit">
-    </form>
+            setTimeout(imgslide, duration);
+        }
 
+        imgslide();
+    </script>
 </body>
-</html>
+</html> 
+
+
+ 
