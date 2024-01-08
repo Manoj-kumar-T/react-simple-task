@@ -1,33 +1,81 @@
 
- <!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slideshow</title>
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <img id="img" / height="500px" width="500px">
+    <h1>Task Manager</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button onclick="addTask()">Add Task</button>
+
+    <h2>Tasks:</h2>
+    <ul id="taskList"></ul>
+
     <script>
-        var img = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRccxHRTilkVkyEpcxBZKleWbZjqylAkn_0tw&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ax7T-THa_CZoXUJdr3f22g6uNqObEjd5ZA&usqp=CAU', 'https://media.zigcdn.com/media/model/2022/Aug/head-light-1192332279_600x400.jpg'];
-        var index = 0;
-        var duration = 1000;
+        const tasks = [];
 
-        function imgslide() { // called function
-            document.getElementById("img").src = img[index];
-            index++;
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
 
-            if (index == img.length) {
-                index = 0;
+            if (taskText !== '') {
+                tasks.push({ text: taskText, completed: false });
+                updateTaskList();
+                taskInput.value = '';
             }
-
-            setTimeout(imgslide, duration);
         }
 
-        imgslide();
+        function updateTaskList() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span class="${task.completed ? 'completed' : ''}">${task.text}</span>
+                    <button onclick="toggleTask(${index})">${task.completed ? 'Undo' : 'Complete'}</button>
+                    <button onclick="removeTask(${index})">Remove</button>
+                `;
+                taskList.appendChild(listItem);
+            });
+        }
+
+        function toggleTask(index) {
+            tasks[index].completed = !tasks[index].completed;
+            updateTaskList();
+        }
+
+        function removeTask(index) {
+            tasks.splice(index, 1);
+            updateTaskList();
+        }
     </script>
 </body>
-</html> 
-
-
- 
+</html>
